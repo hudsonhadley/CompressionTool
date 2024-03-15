@@ -28,6 +28,20 @@ public class FrequencyTable {
      * @param input the string we want to make a frequency table off of
      */
     public FrequencyTable(String input) {
+        Scanner stringScanner = new Scanner(input);
+
+        while (stringScanner.hasNext()) {
+            // We will go line by line through the file
+            Scanner lineScanner = new Scanner(stringScanner.nextLine());
+            lineScanner.useDelimiter(""); // We want to read every character
+
+            // Go through the line
+            while (lineScanner.hasNext()) {
+                char character = lineScanner.next().charAt(0); // Each String will only be 1 long
+
+            }
+        }
+
 
     }
 
@@ -49,17 +63,27 @@ public class FrequencyTable {
     }
 
     /**
+     * Increments the index corresponding to a character by 1
+     * @param c the character we want to increment
+     * @throws IllegalArgumentException if the character is not in the array list
+     */
+    public void increment(char c) throws IllegalArgumentException {
+
+    }
+
+    /**
      * Sees if a character has already been recorded by the table
      * @param c the character we want to check
      * @return true if the character has already been recorded by the table
+     * @throws IllegalArgumentException if the character is not found
      */
-    private boolean contains(char c) {
-        for (Character character: characters) {
-            if (character.equals(c))
-                return true;
+    private int getIndex(char c) {
+        for (int i = 0; i < characters.size(); i++) {
+            if (characters.get(i).equals(c))
+                return i;
         }
         // If we reach the end and haven't found it, we have not recorded it
-        return false;
+        throw new IllegalArgumentException("Character not found");
     }
 
     /**
