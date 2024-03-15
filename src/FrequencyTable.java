@@ -54,6 +54,11 @@ public class FrequencyTable {
      * @return true if the character has already been recorded by the table
      */
     private boolean contains(char c) {
+        for (Character character: characters) {
+            if (character.equals(c))
+                return true;
+        }
+        // If we reach the end and haven't found it, we have not recorded it
         return false;
     }
 
