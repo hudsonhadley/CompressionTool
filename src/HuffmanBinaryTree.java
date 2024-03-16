@@ -12,4 +12,15 @@ public class HuffmanBinaryTree {
      * The root of the binary tree
      */
     private Node root;
+
+    /**
+     * Constructs a new HuffmanBinaryTree with knowledge of the value and weight of the root (this is a HuffmanLeaf)
+     * @param value the value we want to assign (refers to a character)
+     * @param weight the weight we want to assign (refers to frequency)
+     */
+    public HuffmanBinaryTree(char value, int weight) {
+        this.root = new HuffmanLeaf(value, weight);
+    }
+
+
 }
