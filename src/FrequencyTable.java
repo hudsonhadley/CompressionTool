@@ -75,9 +75,8 @@ public class FrequencyTable {
     }
 
     /**
-     * Sees if a character has already been recorded by the table
-     * @param c the character we want to check
-     * @return true if the character has already been recorded by the table
+     * @param c the character we want the index of
+     * @return the index of the character c
      * @throws IllegalArgumentException if the character is not found
      */
     private int getIndex(char c) {
