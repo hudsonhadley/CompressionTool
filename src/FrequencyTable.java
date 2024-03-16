@@ -116,6 +116,15 @@ public class FrequencyTable {
      */
     @Override
     public String toString() {
-        return "";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < characters.size(); i++) {
+            stringBuilder.append(characters.get(i));
+            stringBuilder.append(": ");
+            stringBuilder.append(frequencies.get(i));
+            stringBuilder.append("\n");
+        }
+
+        return stringBuilder.toString();
     }
 }

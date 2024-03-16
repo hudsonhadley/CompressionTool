@@ -27,4 +27,16 @@ public class FrequencyTableTest {
         ft.add('-');
         assertTrue(ft.getFrequency('-') == 2);
     }
+
+    @Test
+    public void toStringTest() {
+        FrequencyTable ft = new FrequencyTable("jaljf");
+
+        String expected = "j: 2\n" +
+                          "a: 1\n" +
+                          "l: 1\n" +
+                          "f: 1\n";
+
+        assertTrue(ft.toString().equals(expected));
+    }
 }
