@@ -69,7 +69,7 @@ public class FrequencyTable {
      * @param c the character we want to increment
      * @throws IllegalArgumentException if the character is not in the array list
      */
-    public void increment(char c) throws IllegalArgumentException {
+    private void increment(char c) throws IllegalArgumentException {
         int index = getIndex(c);
         frequencies.set(index, frequencies.get(index) + 1); // Increment by one
     }
@@ -87,6 +87,27 @@ public class FrequencyTable {
         }
         // If we reach the end and haven't found it, we have not recorded it
         throw new IllegalArgumentException("Character not found");
+    }
+
+    /**
+     * @param c the character we want the frequency of
+     * @return the frequency of character c
+     * @throws IllegalArgumentException if c is not found
+     */
+    public int getFrequency(char c) throws IllegalArgumentException {
+        return frequencies.get(getIndex(c));
+    }
+
+    /**
+     * @param index the index of the character we want the frequency of
+     * @return the frequency of characters.get(index)
+     * @throws IndexOutOfBoundsException if the index is out of boudns
+     */
+    public int getFrequency(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= frequencies.size())
+            throw new IndexOutOfBoundsException("Invalid index");
+
+        return frequencies.get(index);
     }
 
     /**
