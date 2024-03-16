@@ -9,4 +9,14 @@
  * @author Hudson Hadley
  */
 public class HuffmanLeaf extends Node {
+    /**
+     * The value is the character the node refers to
+     */
+    private char value;
+
+    public HuffmanLeaf(char value, int weight) {
+        super(weight, null, null); // Leaves cannot have neighbors
+
+        this.value = value;
+    }
 }
