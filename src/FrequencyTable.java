@@ -28,21 +28,9 @@ public class FrequencyTable {
      * @param input the string we want to make a frequency table off of
      */
     public FrequencyTable(String input) {
-        Scanner stringScanner = new Scanner(input);
-
-        while (stringScanner.hasNext()) {
-            // We will go line by line through the file
-            Scanner lineScanner = new Scanner(stringScanner.nextLine());
-            lineScanner.useDelimiter(""); // We want to read every character
-
-            // Go through the line
-            while (lineScanner.hasNext()) {
-                char character = lineScanner.next().charAt(0); // Each String will only be 1 long
-
-            }
-        }
-
-
+        this.characters = new ArrayList<>();
+        this.frequencies = new ArrayList<>();
+        add(input);
     }
 
     /**
@@ -51,7 +39,12 @@ public class FrequencyTable {
      * @param c the character we want to add
      */
     public void add(char c) {
-
+        try { // Try to increment
+            increment(c);
+        } catch (IllegalArgumentException iae) { // If the character is not in the list, add it
+            characters.add(c);
+            frequencies.add(1);
+        }
     }
 
     /**
@@ -59,7 +52,16 @@ public class FrequencyTable {
      * @param s the string we want to add
      */
     public void add(String s) {
+        Scanner stringScanner = new Scanner(s);
+        stringScanner.useDelimiter("");
 
+        // Go through every character (whitespace included)
+        while (stringScanner.hasNext()) {
+            char character = stringScanner.next().charAt(0);
+            add(character);
+        }
+
+        stringScanner.close();
     }
 
     /**
@@ -68,7 +70,8 @@ public class FrequencyTable {
      * @throws IllegalArgumentException if the character is not in the array list
      */
     public void increment(char c) throws IllegalArgumentException {
-
+        int index = getIndex(c);
+        frequencies.set(index, frequencies.get(index) + 1); // Increment by one
     }
 
     /**
