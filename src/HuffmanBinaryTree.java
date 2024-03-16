@@ -22,5 +22,11 @@ public class HuffmanBinaryTree {
         this.root = new HuffmanLeaf(value, weight);
     }
 
+    /**
+     * Constructs a new HuffmanBinaryTree based off of a frequency table
+     * @param ft the frequency we want to draw from
+     */
+    public HuffmanBinaryTree(FrequencyTable ft) {
 
+    }
 }
