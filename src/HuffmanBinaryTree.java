@@ -39,4 +39,11 @@ public class HuffmanBinaryTree {
     public static void sort(ArrayList<HuffmanBinaryTree> hbt) {
 
     }
+
+    /**
+     * @return the weight of the root node
+     */
+    public int getRootWeight() {
+        return root.weight;
+    }
 }
