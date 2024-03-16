@@ -18,7 +18,7 @@ public class Main {
         StringBuilder stringBuilder = new StringBuilder();
 
         while (fileScanner.hasNext()) {
-            stringBuilder.append(fileScanner.hasNext());
+            stringBuilder.append(fileScanner.next());
         }
 
         return stringBuilder.toString();
@@ -43,6 +43,8 @@ public class Main {
         }
 
         // Now that we have the file, we will determine the frequency of each character occurring within the text
+        FrequencyTable frequencyTable = new FrequencyTable(fileString);
 
+        System.out.println(frequencyTable);
     }
 }
