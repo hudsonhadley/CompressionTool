@@ -6,4 +6,16 @@ public class Node {
     protected int weight;
     protected Node left;
     protected Node right;
+
+    /**
+     * Constructor setting each member variable
+     * @param weight the weight of the node
+     * @param left the left neighbor of the node
+     * @param right the right neighbor of the node
+     */
+    public Node(int weight, Node left, Node right) {
+        this.weight = weight;
+        this.left = left;
+        this.right = right;
+    }
 }
