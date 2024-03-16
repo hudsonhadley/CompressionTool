@@ -1,15 +1,17 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This represents a Huffman binary tree. These are generally used when it comes to Huffman encoding/decoding and refers
  * to how frequently a certain characters appears in a string of text. Each node is either an internal node or a leaf.
  * Internal nodes do not have a value, but only a weight. These always have children. Leafs have both a weight and a
- * value. These never have children.
+ * value. These never have children. Additionally, the HuffmanBinaryTree implements the Comparable interface. This is
+ * so that when we compare two HuffmanBinaryTrees, they are compared based on the weight of the root node.
  * @see HuffmanLeaf
  * @see HuffmanInternalNode
  * @author Hudson Hadley
  */
-public class HuffmanBinaryTree {
+public class HuffmanBinaryTree implements Comparable<HuffmanBinaryTree> {
     /**
      * The root of the binary tree
      */
@@ -29,15 +31,8 @@ public class HuffmanBinaryTree {
      * @param ft the frequency we want to draw from
      */
     public HuffmanBinaryTree(FrequencyTable ft) {
-
-    }
-
-    /**
-     * Sorts a collection of HuffmanBinaryTrees based on the root weight from lowest to highest
-     * @param hbt the array list of Huffman binary trees we want to sort
-     */
-    public static void sort(ArrayList<HuffmanBinaryTree> hbt) {
-
+        ArrayList<HuffmanBinaryTree> hbt = new ArrayList<>();
+        Collections.sort(hbt);
     }
 
     /**
@@ -45,5 +40,15 @@ public class HuffmanBinaryTree {
      */
     public int getRootWeight() {
         return root.weight;
+    }
+
+    /**
+     * Compares the current HuffmanBinaryTree to another HuffmanBinaryTree based on the weight of the root node.
+     * @param hbt the object to be compared.
+     * @return this.getRootWeight() - hbt.getRootWeight()
+     */
+    @Override
+    public int compareTo(HuffmanBinaryTree hbt) {
+        return Integer.compare(this.getRootWeight(), hbt.getRootWeight());
     }
 }
