@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * This represents a Huffman binary tree. These are generally used when it comes to Huffman encoding/decoding and refers
  * to how frequently a certain characters appears in a string of text. Each node is either an internal node or a leaf.
@@ -27,6 +29,14 @@ public class HuffmanBinaryTree {
      * @param ft the frequency we want to draw from
      */
     public HuffmanBinaryTree(FrequencyTable ft) {
+
+    }
+
+    /**
+     * Sorts a collection of HuffmanBinaryTrees based on the root weight from lowest to highest
+     * @param hbt the array list of Huffman binary trees we want to sort
+     */
+    public static void sort(ArrayList<HuffmanBinaryTree> hbt) {
 
     }
 }

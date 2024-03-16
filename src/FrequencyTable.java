@@ -110,13 +110,6 @@ public class FrequencyTable {
     }
 
     /**
-     * Sorts the characters and frequencies from the lowest frequency to the highest frequency
-     */
-    public void sort() {
-        // TODO sort the frequencies and characters from lowest to highest
-    }
-
-    /**
      * Converts the frequency table into a string
      * @return A String representation of the frequency table
      */
