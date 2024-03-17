@@ -21,6 +21,8 @@ public class PrefixCodeTable {
      * @see HuffmanBinaryTree
      */
     public PrefixCodeTable(HuffmanBinaryTree huffmanBinaryTree) {
+        characters = new ArrayList<>();
+        codes = new ArrayList<>();
         generateCodes("", huffmanBinaryTree.getRoot());
     }
 
