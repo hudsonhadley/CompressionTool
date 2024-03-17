@@ -44,7 +44,11 @@ public class Main {
 
         // Now that we have the file, we will determine the frequency of each character occurring within the text
         FrequencyTable frequencyTable = new FrequencyTable(fileString);
-
         System.out.println(frequencyTable);
+
+        // Make a Huffman binary tree based on the frequency table
+        HuffmanBinaryTree huffmanBinaryTree = new HuffmanBinaryTree(frequencyTable);
+
+        System.out.println(huffmanBinaryTree.getRootWeight());
     }
 }
