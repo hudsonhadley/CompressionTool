@@ -35,7 +35,15 @@ public class PrefixCodeTable {
      * @param node the current node we are at
      */
     private void generateCodes(String currentCode, Node node) {
-
+        // If it is a leaf, we want to add the character and code
+        if (node instanceof HuffmanLeaf) {
+            HuffmanLeaf leaf = (HuffmanLeaf) node;
+            characters.add(leaf.getValue());
+            codes.add(currentCode);
+        } else { // If it is not a leaf, all we care about are its children
+            generateCodes(currentCode + "0", node.getLeft());
+            generateCodes(currentCode + "1", node.getRight());
+        }
     }
 
     /**
