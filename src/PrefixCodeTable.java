@@ -51,4 +51,17 @@ public class PrefixCodeTable {
 
         return codes.get(index);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < characters.size(); i++) {
+            stringBuilder.append(characters.get(i));
+            stringBuilder.append(": ");
+            stringBuilder.append(codes.get(i));
+            stringBuilder.append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
 }
