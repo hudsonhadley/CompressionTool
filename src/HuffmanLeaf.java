@@ -19,4 +19,12 @@ public class HuffmanLeaf extends Node {
 
         this.value = value;
     }
+
+    /**
+     * @return a String containing the value and weight of the leaf
+     */
+    @Override
+    public String toString() {
+        return value + " " + weight;
+    }
 }
