@@ -20,6 +20,10 @@ public class HuffmanLeaf extends Node {
         this.value = value;
     }
 
+    public char getValue() {
+        return value;
+    }
+
     /**
      * @return a String containing the value and weight of the leaf
      */
