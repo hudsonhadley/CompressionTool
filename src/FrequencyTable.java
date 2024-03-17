@@ -110,6 +110,13 @@ public class FrequencyTable {
     }
 
     /**
+     * @return the size of the frequency table (i.e. how many characters we have tracked)
+     */
+    public int getSize() {
+        return characters.size();
+    }
+
+    /**
      * Converts the frequency table into a string
      * @return A String representation of the frequency table
      */
