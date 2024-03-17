@@ -28,11 +28,48 @@ public class HuffmanBinaryTree implements Comparable<HuffmanBinaryTree> {
 
     /**
      * Constructs a new HuffmanBinaryTree based off of a frequency table
-     * @param ft the frequency we want to draw from
+     * @param ft the frequency table we want to draw from
      */
     public HuffmanBinaryTree(FrequencyTable ft) {
-        ArrayList<HuffmanBinaryTree> hbt = new ArrayList<>();
-        Collections.sort(hbt);
+        // To begin with we will store a list of trees
+        ArrayList<HuffmanBinaryTree> binaryTreeArrayList = new ArrayList<>();
+
+        // Each tree will only have one node corresponding to an element in the frequency table
+        for (int i = 0; i < ft.getSize(); i++) {
+            HuffmanBinaryTree hbt = new HuffmanBinaryTree(ft.getChar(i), ft.getFrequency(i));
+            binaryTreeArrayList.add(hbt);
+        }
+
+        // We need to continue sorting and merging until we only have one tree left
+        while (binaryTreeArrayList.size() > 1) {
+            Collections.sort(binaryTreeArrayList);
+            // We will be deleting a lot of things. It will be more efficient to delete from the end than from the front
+            Collections.reverse(binaryTreeArrayList);
+
+            binaryTreeArrayList.get(binaryTreeArrayList.size() - 2).merge(
+                    binaryTreeArrayList.get(binaryTreeArrayList.size() - 1)
+            );
+
+            // Remove the last index
+            binaryTreeArrayList.remove(binaryTreeArrayList.size() - 1);
+        }
+
+        this.root = new Node(binaryTreeArrayList.get(0).root);
+    }
+
+    /**
+     * Merges two Huffman binary trees by adding the two weights of the root nodes together to make a different root
+     * node. The two trees then become nodes of this root
+     * @param other the other Huffman binary tree we want to merge with
+     */
+    private void merge(HuffmanBinaryTree other) {
+        HuffmanInternalNode root = new HuffmanInternalNode(
+                this.getRootWeight() + other.getRootWeight(),
+                other.getRoot(),
+                this.getRoot()
+
+        );
+        setRoot(root);
     }
 
     /**
@@ -40,6 +77,17 @@ public class HuffmanBinaryTree implements Comparable<HuffmanBinaryTree> {
      */
     public int getRootWeight() {
         return root.weight;
+    }
+
+    /**
+     * @return the root node
+     */
+    public Node getRoot() {
+        return root;
+    }
+
+    public void setRoot(Node root) {
+        this.root = root;
     }
 
     /**
