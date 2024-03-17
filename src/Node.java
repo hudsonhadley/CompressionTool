@@ -41,4 +41,12 @@ public class Node {
     public Node getRight() {
         return right;
     }
+
+    /**
+     * @return a String containing the weight of the node
+     */
+    @Override
+    public String toString() {
+        return "" + weight;
+    }
 }
