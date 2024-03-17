@@ -21,6 +21,18 @@ public class PrefixCodeTable {
      * @see HuffmanBinaryTree
      */
     public PrefixCodeTable(HuffmanBinaryTree huffmanBinaryTree) {
+        generateCodes("", huffmanBinaryTree.getRoot());
+    }
+
+    /**
+     * Traverses through a current node using recursion and generates codes for each node.
+     * Only leaves are added to the characters and codes lists, but there does exist a code for each node.
+     * Starting with the currentCode, if we take a left we add a 0 to the beginning, and if we take a right
+     * we add a 1 to the beginning.
+     * @param currentCode the code we have at the current node. If it is the first time calling, it will be ""
+     * @param node the current node we are at
+     */
+    private void generateCodes(String currentCode, Node node) {
 
     }
 
