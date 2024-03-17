@@ -19,6 +19,17 @@ public class Node {
         this.right = right;
     }
 
+    /**
+     * Creates a semi-deep copy of a Node. Semi-deep meaning that the weight is a deep copy, but it merely references
+     * to the left and to the right.
+     * @param other the Node we want to copy
+     */
+    public Node(Node other) {
+        this.weight = other.weight;
+        this.left = other.left;
+        this.right = other.right;
+    }
+
     public int getWeight() {
         return weight;
     }
