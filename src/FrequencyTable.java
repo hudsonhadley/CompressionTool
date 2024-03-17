@@ -100,13 +100,25 @@ public class FrequencyTable {
     /**
      * @param index the index of the character we want the frequency of
      * @return the frequency of characters.get(index)
-     * @throws IndexOutOfBoundsException if the index is out of boudns
+     * @throws IndexOutOfBoundsException if the index is out of bounds
      */
     public int getFrequency(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= frequencies.size())
             throw new IndexOutOfBoundsException("Invalid index");
 
         return frequencies.get(index);
+    }
+
+    /**
+     * @param index the index of the character we want
+     * @return the character at characters.get(index)
+     * @throws IndexOutOfBoundsException if the index is out of bounds
+     */
+    public char getChar(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= characters.size())
+            throw new IndexOutOfBoundsException("Invalid index");
+
+        return characters.get(index);
     }
 
     /**
