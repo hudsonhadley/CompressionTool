@@ -17,8 +17,11 @@ public class Compressor {
     /**
      * Constructs a compressor based on an input
      * @param input the string we want to compress
+     * @throws IllegalArgumentException if an empty string is passed
      */
-    public Compressor(String input) {
+    public Compressor(String input) throws IllegalArgumentException {
+        if (input.isEmpty())
+            throw new IllegalArgumentException("String is empty");
         frequencyTable = new FrequencyTable(input);
         huffmanBinaryTree = new HuffmanBinaryTree(frequencyTable);
         prefixCodeTable = new PrefixCodeTable(huffmanBinaryTree);
@@ -37,8 +40,15 @@ public class Compressor {
      * 0110000100011100
      * @return a binary header storing the frequency table
      */
-    private String getHeader() {
-        return "";
+    public String getHeader() {
+        StringBuilder headerBuilder = new StringBuilder();
+
+        for (int i = 0; i < frequencyTable.getSize(); i++) {
+            headerBuilder.append(makeByte(frequencyTable.getChar(i))); // chars are ints in reality
+            headerBuilder.append(makeByte(frequencyTable.getFrequency(i)));
+        }
+
+        return headerBuilder.toString();
     }
 
     /**
