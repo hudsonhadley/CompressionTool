@@ -25,6 +25,16 @@ public class Compressor {
     }
 
     /**
+     * This method converts the frequency table into a binary string.
+     * It should be noted that it does not just convert frequencyTable.toString() into binary. This would cause lots
+     * of useless text to be in our compressed file (which defeats the purpose). Instead, each element of the table
+     * has the character in binary, then the frequency in binary back to back. We tell the difference since each
+     * character/frequency is a byte long (8 bits).
+     * <br>
+     * <br>
+     * An example of this would be if 'a' occurred 28 times, we would have:
+     * <br>
+     * 0110000100011100
      * @return a binary header storing the frequency table
      */
     private String getHeader() {
