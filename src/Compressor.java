@@ -47,6 +47,13 @@ public class Compressor {
      * @return the integer i in byte form
      */
     private String makeByte(int i) {
+        StringBuilder byteBuilder = new StringBuilder();
+        byteBuilder.append(Integer.toBinaryString(i));
+
+        while (byteBuilder.length() < 8)
+            byteBuilder.insert(0, "0");
+
+        return byteBuilder.toString();
     }
 
     /**
