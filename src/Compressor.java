@@ -13,6 +13,7 @@ public class Compressor {
     private FrequencyTable frequencyTable;
     private HuffmanBinaryTree huffmanBinaryTree;
     private PrefixCodeTable prefixCodeTable;
+    private String text;
 
     /**
      * Constructs a compressor based on an input
@@ -25,6 +26,7 @@ public class Compressor {
         frequencyTable = new FrequencyTable(input);
         huffmanBinaryTree = new HuffmanBinaryTree(frequencyTable);
         prefixCodeTable = new PrefixCodeTable(huffmanBinaryTree);
+        text = input;
     }
 
     /**
@@ -73,6 +75,8 @@ public class Compressor {
     }
 
     /**
+     * Compressed strings have two parts: the header and the text. The header is found by getHeader(). The text is
+     * found by substituting each character in the original input for its code.
      * @return the compressed string
      */
     public String compress() {
