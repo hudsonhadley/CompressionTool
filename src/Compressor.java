@@ -38,15 +38,21 @@ public class Compressor {
      * An example of this would be if 'a' occurred 28 times, we would have:
      * <br>
      * 0110000100011100
+     * <br>
+     * Headers also contain a separator so the decompressor knows when to start translating back. The indicator of this
+     * will be the first character in binary again.
      * @return a binary header storing the frequency table
      */
-    public String getHeader() {
+    private String getHeader() {
         StringBuilder headerBuilder = new StringBuilder();
 
         for (int i = 0; i < frequencyTable.getSize(); i++) {
             headerBuilder.append(makeByte(frequencyTable.getChar(i))); // chars are ints in reality
             headerBuilder.append(makeByte(frequencyTable.getFrequency(i)));
         }
+
+        // Create a separator
+        headerBuilder.append(makeByte(frequencyTable.getChar(0)));
 
         return headerBuilder.toString();
     }
