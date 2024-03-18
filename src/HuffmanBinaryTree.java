@@ -54,7 +54,7 @@ public class HuffmanBinaryTree implements Comparable<HuffmanBinaryTree> {
             binaryTreeArrayList.remove(binaryTreeArrayList.size() - 1);
         }
 
-        this.root = new Node(binaryTreeArrayList.get(0).root);
+        this.root = binaryTreeArrayList.get(0).root;
     }
 
     /**
