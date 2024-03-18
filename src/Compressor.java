@@ -19,7 +19,9 @@ public class Compressor {
      * @param input the string we want to compress
      */
     public Compressor(String input) {
-
+        frequencyTable = new FrequencyTable(input);
+        huffmanBinaryTree = new HuffmanBinaryTree(frequencyTable);
+        prefixCodeTable = new PrefixCodeTable(huffmanBinaryTree);
     }
 
     /**
