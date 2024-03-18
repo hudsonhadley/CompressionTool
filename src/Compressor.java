@@ -42,6 +42,14 @@ public class Compressor {
     }
 
     /**
+     * Converts an integer into a byte
+     * @param i an integer we want to convert
+     * @return the integer i in byte form
+     */
+    private String makeByte(int i) {
+    }
+
+    /**
      * @return the compressed string
      */
     public String compress() {
