@@ -75,11 +75,20 @@ public class Compressor {
     }
 
     /**
-     * Compressed strings have two parts: the header and the text. The header is found by getHeader(). The text is
+     * Gives the bit string representation of the text. Compressed strings have two parts: the header and the text. The header is found by getHeader(). The text is
      * found by substituting each character in the original input for its code.
      * @return the compressed string
+     * @see Compressor#getHeader()
      */
-    public String compress() {
-        return "";
+    public String getBitString() {
+        StringBuilder compressedStringBuilder = new StringBuilder();
+        compressedStringBuilder.append(getHeader());
+
+        // Go through every character in the text and replace each in the string builder
+        for (int i = 0; i < text.length(); i++) {
+            compressedStringBuilder.append(prefixCodeTable.getCode(text.charAt(i)));
+        }
+
+        return compressedStringBuilder.toString();
     }
 }
