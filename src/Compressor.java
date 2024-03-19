@@ -49,12 +49,12 @@ public class Compressor {
         StringBuilder headerBuilder = new StringBuilder();
 
         for (int i = 0; i < frequencyTable.getSize(); i++) {
-            headerBuilder.append(makeByte(frequencyTable.getChar(i))); // chars are ints in reality
-            headerBuilder.append(makeByte(frequencyTable.getFrequency(i)));
+            headerBuilder.append(makeByteString(frequencyTable.getChar(i))); // chars are ints in reality
+            headerBuilder.append(makeByteString(frequencyTable.getFrequency(i)));
         }
 
         // Create a separator
-        headerBuilder.append(makeByte(frequencyTable.getChar(0)));
+        headerBuilder.append(makeByteString(frequencyTable.getChar(0)));
 
         return headerBuilder.toString();
     }
@@ -64,7 +64,7 @@ public class Compressor {
      * @param i an integer we want to convert
      * @return the integer i in byte form
      */
-    private String makeByte(int i) {
+    private String makeByteString(int i) {
         StringBuilder byteBuilder = new StringBuilder();
         byteBuilder.append(Integer.toBinaryString(i));
 
