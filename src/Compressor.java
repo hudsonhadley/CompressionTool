@@ -60,7 +60,7 @@ public class Compressor {
     }
 
     /**
-     * Converts an integer into a byte
+     * Converts an integer into a byte string
      * @param i an integer we want to convert
      * @return the integer i in byte form
      */
@@ -72,6 +72,16 @@ public class Compressor {
             byteBuilder.insert(0, "0");
 
         return byteBuilder.toString();
+    }
+
+    /**
+     * Converts a string of 0s and 1s into an actual byte
+     * @param s a string of 0s and 1s we want to convert
+     * @return the byte that s represents
+     * @throws IllegalArgumentException if s is not 8 long or has something other than a 0 or 1
+     */
+    private byte stringToByte(String s) throws IllegalArgumentException {
+        return 0b00;
     }
 
     /**
