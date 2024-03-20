@@ -106,6 +106,11 @@ public class Compressor {
             compressedStringBuilder.append(prefixCodeTable.getCode(text.charAt(i)));
         }
 
+        // The bit string has to be divisible by 8, so we will add the opposite of the last bit until we reach that
+        char addOn = compressedStringBuilder.charAt(compressedStringBuilder.length() - 1) == '0' ? '1' : '0';
+        while (compressedStringBuilder.length() % 8 != 0)
+            compressedStringBuilder.append(addOn);
+
         return compressedStringBuilder.toString();
     }
 }
