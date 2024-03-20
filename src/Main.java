@@ -1,6 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -24,31 +24,21 @@ public class Main {
         return stringBuilder.toString();
     }
 
-    public static void main(String[] args) {
-        Scanner inScanner = new Scanner(System.in);
-        String fileString;
+    /**
+     * The main loop that is executed upon call
+     * @param args has the pattern of
+     *             <br>
+     *             &lt;input&gt; [-d] &lt;output&gt;
+     *             <br><br>
+     *             &lt;input&gt; - the file we want to compress
+     *             <br>
+     *             [-d] - if we want to decompress
+     *             <br>
+     *             &lt;output&gt; - where we want our output to go (default is the input)
+     *
+     * @throws IOException from FileOutputStream.write(bytes[]) or if an improper amount of arguments is given
+     */
+    public static void main(String[] args) throws IOException {
 
-        // Get a file name from the user and ensure that it is a valid file name
-        while (true) {
-            System.out.print("Please enter a file name> ");
-            String fileName = inScanner.nextLine(); // Files could have spaces in them...
-
-            // Try to get the Sting
-            try {
-                fileString = getFileString(fileName);
-                break;
-            } catch (FileNotFoundException fnfe) { // If we cannot find the file, we will try again...
-                System.out.printf("The file named '%s' was not found\n", fileName);
-            }
-        }
-
-        // Now that we have the file, we will determine the frequency of each character occurring within the text
-        FrequencyTable frequencyTable = new FrequencyTable(fileString);
-        System.out.println(frequencyTable);
-
-        // Make a Huffman binary tree based on the frequency table
-        HuffmanBinaryTree huffmanBinaryTree = new HuffmanBinaryTree(frequencyTable);
-
-        System.out.println(huffmanBinaryTree.getRootWeight());
     }
 }
