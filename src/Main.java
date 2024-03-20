@@ -66,5 +66,17 @@ public class Main {
             decompressing = true;
             output = args[2];
         }
+
+        // Get the string of the file
+        String inputFileString = getFileString(input);
+
+        if (decompressing) {
+            // TODO Decompress the file
+        } else {
+            Compressor compressor = new Compressor(inputFileString);
+            byte[] bytes = compressor.getBytes();
+            FileOutputStream outputFile = new FileOutputStream(output);
+            outputFile.write(bytes);
+        }
     }
 }
