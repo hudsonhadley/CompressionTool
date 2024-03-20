@@ -81,7 +81,14 @@ public class Compressor {
      * @throws IllegalArgumentException if s is not 8 long or has something other than a 0 or 1
      */
     private byte stringToByte(String s) throws IllegalArgumentException {
-        return 0b00;
+        if (s.length() != 8)
+            throw new IllegalArgumentException("String must be 8 long");
+
+        try {
+            return Byte.parseByte(s);
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("String must only have 1s and 0s");
+        }
     }
 
     /**
