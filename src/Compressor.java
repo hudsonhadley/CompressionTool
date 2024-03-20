@@ -85,7 +85,7 @@ public class Compressor {
             throw new IllegalArgumentException("String must be 8 long");
 
         try {
-            return Byte.parseByte(s);
+            return s.getBytes()[0]; // TODO make actual 0 and 1 (not just '0' and '1')
         } catch (NumberFormatException nfe) {
             throw new IllegalArgumentException("String must only have 1s and 0s");
         }
@@ -108,6 +108,10 @@ public class Compressor {
 
         // The bit string has to be divisible by 8, so we will add the opposite of the last bit until we reach that
         char addOn = compressedStringBuilder.charAt(compressedStringBuilder.length() - 1) == '0' ? '1' : '0';
+
+        // If the compressed string is already at 8, we need to add something on so the decompressor knows not to erase
+        // part of the file
+        compressedStringBuilder.append(addOn);
         while (compressedStringBuilder.length() % 8 != 0)
             compressedStringBuilder.append(addOn);
 
@@ -119,6 +123,14 @@ public class Compressor {
      * @return the compressed byte array
      */
     public byte[] getBytes() {
-        return new byte[1];
+        String bitString = getBitString();
+        byte[] bytes = new byte[bitString.length() / 8];
+
+        for (int i = 0; i < bytes.length; i++) {
+            String substring = bitString.substring(i, i + 8);
+            bytes[i] = stringToByte(substring);
+        }
+
+        return bytes;
     }
 }
