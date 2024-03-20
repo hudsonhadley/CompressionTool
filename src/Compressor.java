@@ -97,7 +97,7 @@ public class Compressor {
      * @return the compressed string
      * @see Compressor#getHeader()
      */
-    public String getBitString() {
+    private String getBitString() {
         StringBuilder compressedStringBuilder = new StringBuilder();
         compressedStringBuilder.append(getHeader());
 
@@ -112,5 +112,13 @@ public class Compressor {
             compressedStringBuilder.append(addOn);
 
         return compressedStringBuilder.toString();
+    }
+
+    /**
+     * Converts the given text into a byte array
+     * @return the compressed byte array
+     */
+    public byte[] getBytes() {
+        return new byte[1];
     }
 }
