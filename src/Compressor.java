@@ -84,11 +84,7 @@ public class Compressor {
         if (s.length() != 8)
             throw new IllegalArgumentException("String must be 8 long");
 
-        try {
-            return s.getBytes()[0]; // TODO make actual 0 and 1 (not just '0' and '1')
-        } catch (NumberFormatException nfe) {
-            throw new IllegalArgumentException("String must only have 1s and 0s");
-        }
+        return (byte) Integer.parseInt(s);
     }
 
     /**
