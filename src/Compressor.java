@@ -118,7 +118,7 @@ public class Compressor {
      * Converts the given text into a byte array
      * @return the compressed byte array
      */
-    public byte[] getBytes() {
+    public byte[] compress() {
         String bitString = getBitString();
         byte[] bytes = new byte[bitString.length() / 8];
 

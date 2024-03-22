@@ -1,6 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -74,7 +72,7 @@ public class Main {
             // TODO Decompress the file
         } else {
             Compressor compressor = new Compressor(inputFileString);
-            byte[] bytes = compressor.getBytes();
+            byte[] bytes = compressor.compress();
             FileOutputStream outputFile = new FileOutputStream(output);
             outputFile.write(bytes);
         }
