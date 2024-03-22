@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -26,10 +27,13 @@ public class Main {
      * Fetches a binary file we want to parse through.
      * @param fileName the name of the file we want to parse
      * @return a byte[] of the file
-     * @throws FileNotFoundException if the file cannot be found
+     * @throws IOException if the file cannot be found or if readAllBytes() fails
      */
-    public static byte[] getFileBytes(String fileName) throws FileNotFoundException {
-        return new byte[]{};
+    public static byte[] getFileBytes(String fileName) throws IOException {
+        File inFile = new File(fileName);
+        FileInputStream inputStream = new FileInputStream(inFile);
+
+        return inputStream.readAllBytes();
     }
 
     /**
@@ -77,12 +81,20 @@ public class Main {
 
         if (decompressing) {
             // TODO Decompress the file
+            byte[] inputBytes = getFileBytes(input);
+
+            Decompressor decompressor = new Decompressor(inputBytes);
+            String text = decompressor.decompress();
+
+            PrintWriter printWriter = new PrintWriter(output);
+            printWriter.write(text);
         } else {
             // Get the string of the file
             String inputFileString = getFileString(input);
 
             Compressor compressor = new Compressor(inputFileString);
             byte[] bytes = compressor.compress();
+
             FileOutputStream outputFile = new FileOutputStream(output);
             outputFile.write(bytes);
         }
