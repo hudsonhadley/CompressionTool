@@ -34,6 +34,16 @@ public class FrequencyTable {
     }
 
     /**
+     * A constructor which creates a table based on a list of chars and frequencies
+     * @param characters the characters in the table
+     * @param frequencies the times each character shows up
+     */
+    public FrequencyTable(ArrayList<Character> characters, ArrayList<Integer> frequencies) {
+        this.characters = new ArrayList<>(characters);
+        this.frequencies = new ArrayList<>(frequencies);
+    }
+
+    /**
      * Adds a character and updates the frequency of it (if it hasn't been seen yet, an element is added to both array
      * lists)
      * @param c the character we want to add
