@@ -8,7 +8,7 @@ public class Main {
      * @return a String of the file
      * @throws FileNotFoundException if the file cannot be found
      */
-    public static String getFileString(String fileName) throws FileNotFoundException{
+    public static String getFileString(String fileName) throws FileNotFoundException {
         File inFile = new File(fileName);
         Scanner fileScanner = new Scanner(inFile);
         fileScanner.useDelimiter("");
@@ -20,6 +20,16 @@ public class Main {
         }
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * Fetches a binary file we want to parse through.
+     * @param fileName the name of the file we want to parse
+     * @return a byte[] of the file
+     * @throws FileNotFoundException if the file cannot be found
+     */
+    public static byte[] getFileBytes(String fileName) throws FileNotFoundException {
+        return new byte[]{};
     }
 
     /**
@@ -65,12 +75,12 @@ public class Main {
             output = args[2];
         }
 
-        // Get the string of the file
-        String inputFileString = getFileString(input);
-
         if (decompressing) {
             // TODO Decompress the file
         } else {
+            // Get the string of the file
+            String inputFileString = getFileString(input);
+
             Compressor compressor = new Compressor(inputFileString);
             byte[] bytes = compressor.compress();
             FileOutputStream outputFile = new FileOutputStream(output);
