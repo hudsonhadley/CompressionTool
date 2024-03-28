@@ -4,6 +4,36 @@ import java.util.Scanner;
 
 public class Main {
     /**
+     * Converts an integer into a byte string
+     * @param i an integer we want to convert
+     * @return the integer i in byte form
+     * @throws IllegalArgumentException if i is too big
+     */
+    public static String makeByteString(int i) throws IllegalArgumentException {
+        return makeBitString(i, 8);
+    }
+
+    /**
+     * Converts an integer into a bit string of a certain length
+     * @param i the integer we want to convert
+     * @param len the length of the bit string we want
+     * @return the integer i in bit string form with length len
+     * @throws IllegalArgumentException if i is too big to be len long
+     */
+    public static String makeBitString(int i, int len) throws IllegalArgumentException {
+        StringBuilder byteBuilder = new StringBuilder();
+        byteBuilder.append(Integer.toBinaryString(i));
+
+        if (byteBuilder.length() > len)
+            throw new IllegalArgumentException("i cannot be converted to length " + len);
+
+        while (byteBuilder.length() < len)
+            byteBuilder.insert(0, "0");
+
+        return byteBuilder.toString();
+    }
+
+    /**
      * Fetches a file we want to parse through.
      * @param fileName the name of the file we want to parse
      * @return a String of the file

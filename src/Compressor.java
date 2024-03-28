@@ -58,49 +58,21 @@ public class Compressor {
         int maxFrequency = frequencyTable.getMaxFrequency();
         int frequencyLength = Integer.toBinaryString(maxFrequency).length();
         // This length will be the first thing in the file corresponding to the first byte
-        headerBuilder.append(makeByteString(frequencyLength));
+        headerBuilder.append(Main.makeByteString(frequencyLength));
 
 
         for (int i = 0; i < frequencyTable.getSize(); i++) {
-            headerBuilder.append(makeByteString(frequencyTable.getChar(i))); // chars are ints in reality
-            headerBuilder.append(makeBitString(frequencyTable.getFrequency(i), frequencyLength));
+            headerBuilder.append(Main.makeByteString(frequencyTable.getChar(i))); // chars are ints in reality
+            headerBuilder.append(Main.makeBitString(frequencyTable.getFrequency(i), frequencyLength));
         }
 
         // Create a separator
-        headerBuilder.append(makeByteString(frequencyTable.getChar(0)));
+        headerBuilder.append(Main.makeByteString(frequencyTable.getChar(0)));
 
         return headerBuilder.toString();
     }
 
-    /**
-     * Converts an integer into a byte string
-     * @param i an integer we want to convert
-     * @return the integer i in byte form
-     * @throws IllegalArgumentException if i is too big
-     */
-    private String makeByteString(int i) throws IllegalArgumentException {
-        return makeBitString(i, 8);
-    }
 
-    /**
-     * Converts an integer into a bit string of a certain length
-     * @param i the integer we want to convert
-     * @param len the length of the bit string we want
-     * @return the integer i in bit string form with length len
-     * @throws IllegalArgumentException if i is too big to be len long
-     */
-    private String makeBitString(int i, int len) throws IllegalArgumentException {
-        StringBuilder byteBuilder = new StringBuilder();
-        byteBuilder.append(Integer.toBinaryString(i));
-
-        if (byteBuilder.length() > len)
-            throw new IllegalArgumentException("i cannot be converted to length " + len);
-
-        while (byteBuilder.length() < len)
-            byteBuilder.insert(0, "0");
-
-        return byteBuilder.toString();
-    }
 
     /**
      * Converts a string of 0s and 1s into an actual byte
