@@ -1,4 +1,8 @@
 import java.beans.FeatureDescriptor;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 
 /**
  * The Decompressor class is used to decompress a file or String. The file must be compressed by the Compressor class
@@ -16,15 +20,34 @@ public class Decompressor {
     private FrequencyTable frequencyTable;
     private HuffmanBinaryTree huffmanBinaryTree;
     private PrefixCodeTable prefixCodeTable;
-    private byte[] bytes;
+    private String bytes;
 
     /**
      * Constructs a decompressor based on the input text
      * @param input the compressed byte[] we wish to decompress
      * @throws IllegalArgumentException if an empty String is passed
      */
-    public Decompressor(byte[] input) throws IllegalArgumentException{
-        // TODO finish method
+    public Decompressor(byte[] input) throws IllegalArgumentException {
+        bytes = bytesToString(input);
+        System.out.println(bytes);
+
+        frequencyTable = getFrequencyTable();
+//        System.out.println(frequencyTable.getFrequency('X'));
+    }
+
+    /**
+     * @param bytes an array of bytes we want to turn into a string of 0s and 1s
+     * @return a String of 0s and 1s representing the bytes array
+     */
+    private String bytesToString(byte[] bytes) {
+        StringBuilder byteBuilder = new StringBuilder();
+
+        for (byte b: bytes) {
+            int num = Byte.toUnsignedInt(b);
+
+            byteBuilder.append(Main.makeByteString(num));
+        }
+        return byteBuilder.toString();
     }
 
     /**
@@ -39,6 +62,9 @@ public class Decompressor {
      * @return the frequency table that is encoded in the header of the byte[]
      */
     private FrequencyTable getFrequencyTable() {
-        return new FrequencyTable(); //TODO finish method
+        ArrayList<Character> characters = new ArrayList<>();
+        ArrayList<Integer> frequencies = new ArrayList<>();
+
+        return new FrequencyTable(characters, frequencies);
     }
 }
