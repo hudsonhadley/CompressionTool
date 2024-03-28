@@ -168,6 +168,7 @@ public class Main {
 
             PrintWriter printWriter = new PrintWriter(output);
             printWriter.write(text);
+            printWriter.close();
         } else {
             // Get the string of the file
             String inputFileString = getFileString(input);
@@ -177,6 +178,7 @@ public class Main {
 
             FileOutputStream outputFile = new FileOutputStream(output);
             outputFile.write(bytes);
+            outputFile.close();
         }
     }
 }
