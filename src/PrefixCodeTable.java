@@ -69,6 +69,21 @@ public class PrefixCodeTable {
         return codes.get(index);
     }
 
+    /**
+     * @param code the code of the character we want to look up
+     * @return the character with the correct code
+     * @throws IllegalArgumentException if the code is not found
+     */
+    public char getChar(String code) throws IllegalArgumentException {
+        int index = codes.indexOf(code);
+
+        // If we cannot find the code
+        if (index == -1)
+            throw new IllegalArgumentException("Code not found");
+
+        return characters.get(index);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
