@@ -112,6 +112,18 @@ public class Compressor {
         if (s.length() != 8)
             throw new IllegalArgumentException("String must be 8 long");
 
+        byte b = 0;
+
+        if (s.charAt(0) == '1')
+            b = 1;
+
+        for (int i = 1; i < 8; i++) {
+            b <<= 1; // shift the bit 1 over (1 -> 10 or 0 -> 00)
+
+            if (s.charAt(i) == '1')
+                b += 1;
+        }
+        System.out.println(Byte.toUnsignedInt(b));
         return (byte) Integer.parseInt(s);
     }
 
