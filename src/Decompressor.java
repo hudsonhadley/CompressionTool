@@ -28,6 +28,8 @@ public class Decompressor {
      * @throws IllegalArgumentException if an empty String is passed
      */
     public Decompressor(byte[] input) throws IllegalArgumentException {
+        if (input.length == 0)
+            throw new IllegalArgumentException("No input to decompress");
         bytes = Main.bytesToString(input);
         System.out.println(bytes);
 
