@@ -1,4 +1,5 @@
 import java.sql.SQLOutput;
+import java.util.Arrays;
 
 /**
  * The Compressor class is used to compress a String or file. It uses a frequency
@@ -95,8 +96,8 @@ public class Compressor {
             if (s.charAt(i) == '1')
                 b += 1;
         }
-        System.out.println(Byte.toUnsignedInt(b));
-        return (byte) Integer.parseInt(s);
+
+        return b;
     }
 
     /**
@@ -132,6 +133,7 @@ public class Compressor {
      */
     public byte[] compress() {
         String bitString = getBitString();
+
         byte[] bytes = new byte[bitString.length() / 8];
 
         for (int i = 0; i < bytes.length; i++) {
