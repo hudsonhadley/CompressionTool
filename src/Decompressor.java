@@ -33,7 +33,6 @@ public class Decompressor {
         if (input.length == 0)
             throw new IllegalArgumentException("No input to decompress");
         bytes = Main.bytesToString(input);
-        System.out.println(bytes);
 
         frequencyTable = getFrequencyTable();
         huffmanBinaryTree = new HuffmanBinaryTree(frequencyTable);
@@ -48,8 +47,6 @@ public class Decompressor {
             i -= 1;
 
         endOfText = i + 1;
-
-        System.out.println(startOfText + " " + endOfText);
     }
 
     /**
@@ -57,7 +54,36 @@ public class Decompressor {
      * @return the decompressed String
      */
     public String decompress() {
-        return ""; // TODO finish method
+        String text = bytes.substring(startOfText, endOfText);
+        StringBuilder decompressedTextBuilder = new StringBuilder();
+
+        // When parsing through the text, we need a start and an end. The length of each code varies so we cannot look
+        // in a specific range. We will start at one character. If nothing is found, we move on to two, and so on. When
+        // we do find a code, the end becomes the start of the next one and we repeat until the end of the file.
+        int start = 0;
+        int end = 1;
+
+        // Go through the bits and find the codes
+        while (start < text.length()) {
+
+            // This will continue until we successfully find a code and can break
+            while (true) {
+                try {
+                    // Will throw IllegalArgumentException if code not found
+                    char c = prefixCodeTable.getChar(text.substring(start, end));
+
+                    // Will only reach these two lines if it successfully finds a code
+                    decompressedTextBuilder.append(c);
+                    break;
+                } catch (IllegalArgumentException iae) {
+                    end += 1; // If we can't find a code, increase our range
+                }
+            }
+            start = end; // Start becomes the end and we keep looking for other codes
+            end = start + 1;
+        }
+
+        return decompressedTextBuilder.toString();
     }
 
     /**
