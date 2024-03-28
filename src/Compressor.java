@@ -74,32 +74,6 @@ public class Compressor {
     }
 
 
-
-    /**
-     * Converts a string of 0s and 1s into an actual byte
-     * @param s a string of 0s and 1s we want to convert
-     * @return the byte that s represents
-     * @throws IllegalArgumentException if s is not 8 long or has something other than a 0 or 1
-     */
-    private byte stringToByte(String s) throws IllegalArgumentException {
-        if (s.length() != 8)
-            throw new IllegalArgumentException("String must be 8 long");
-
-        byte b = 0;
-
-        if (s.charAt(0) == '1')
-            b = 1;
-
-        for (int i = 1; i < 8; i++) {
-            b <<= 1; // shift the bit 1 over (1 -> 10 or 0 -> 00)
-
-            if (s.charAt(i) == '1')
-                b += 1;
-        }
-
-        return b;
-    }
-
     /**
      * Gives the bit string representation of the text. Compressed strings have two parts: the header and the text. The header is found by getHeader(). The text is
      * found by substituting each character in the original input for its code.
@@ -138,7 +112,7 @@ public class Compressor {
 
         for (int i = 0; i < bytes.length; i++) {
             String substring = bitString.substring(i * 8, i * 8 + 8);
-            bytes[i] = stringToByte(substring);
+            bytes[i] = Main.stringToByte(substring);
         }
 
         return bytes;

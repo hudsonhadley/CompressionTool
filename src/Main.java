@@ -4,6 +4,46 @@ import java.util.Scanner;
 
 public class Main {
     /**
+     * Converts a string of 0s and 1s into an actual byte
+     * @param s a string of 0s and 1s we want to convert
+     * @return the byte that s represents
+     * @throws IllegalArgumentException if s is not 8 long or has something other than a 0 or 1
+     */
+    public static byte stringToByte(String s) throws IllegalArgumentException {
+        if (s.length() != 8)
+            throw new IllegalArgumentException("String must be 8 long");
+
+        byte b = 0;
+
+        if (s.charAt(0) == '1')
+            b = 1;
+
+        for (int i = 1; i < 8; i++) {
+            b <<= 1; // shift the bit 1 over (1 -> 10 or 0 -> 00)
+
+            if (s.charAt(i) == '1')
+                b += 1;
+        }
+
+        return b;
+    }
+
+    /**
+     * @param bytes an array of bytes we want to turn into a string of 0s and 1s
+     * @return a String of 0s and 1s representing the bytes array
+     */
+    public static String bytesToString(byte[] bytes) {
+        StringBuilder byteBuilder = new StringBuilder();
+
+        for (byte b: bytes) {
+            int num = Byte.toUnsignedInt(b);
+
+            byteBuilder.append(Main.makeByteString(num));
+        }
+        return byteBuilder.toString();
+    }
+
+    /**
      * Converts an integer into a byte string
      * @param i an integer we want to convert
      * @return the integer i in byte form

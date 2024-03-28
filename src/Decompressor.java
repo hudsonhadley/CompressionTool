@@ -28,26 +28,11 @@ public class Decompressor {
      * @throws IllegalArgumentException if an empty String is passed
      */
     public Decompressor(byte[] input) throws IllegalArgumentException {
-        bytes = bytesToString(input);
+        bytes = Main.bytesToString(input);
         System.out.println(bytes);
 
         frequencyTable = getFrequencyTable();
 //        System.out.println(frequencyTable.getFrequency('X'));
-    }
-
-    /**
-     * @param bytes an array of bytes we want to turn into a string of 0s and 1s
-     * @return a String of 0s and 1s representing the bytes array
-     */
-    private String bytesToString(byte[] bytes) {
-        StringBuilder byteBuilder = new StringBuilder();
-
-        for (byte b: bytes) {
-            int num = Byte.toUnsignedInt(b);
-
-            byteBuilder.append(Main.makeByteString(num));
-        }
-        return byteBuilder.toString();
     }
 
     /**
