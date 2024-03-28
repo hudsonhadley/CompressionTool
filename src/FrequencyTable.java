@@ -139,6 +139,20 @@ public class FrequencyTable {
     }
 
     /**
+     * @return the greatest frequency in the table
+     */
+    public int getMaxFrequency() {
+        int max = 0;
+
+        for (int frequency : frequencies) {
+            if (frequency > max)
+                max = frequency;
+        }
+
+        return max;
+    }
+
+    /**
      * Converts the frequency table into a string
      * @return A String representation of the frequency table
      */
