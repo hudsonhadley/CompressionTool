@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+
 /**
  * The Compressor class is used to compress a String or file. It uses a frequency
  * table in conjunction with a Huffman binary tree and a prefix code table to
@@ -48,9 +50,20 @@ public class Compressor {
     private String getHeader() {
         StringBuilder headerBuilder = new StringBuilder();
 
+        // We first need to determine how many bits are going to be used to store each frequency
+        // (This cannot simply be a byte since frequencies will often exceed 2^8 for large text files)
+
+        // The amount of bits it takes to store the greatest frequency is the amount of bits we will use
+        // to store each frequency
+        int maxFrequency = frequencyTable.getMaxFrequency();
+        int frequencyLength = Integer.toBinaryString(maxFrequency).length();
+        // This length will be the first thing in the file corresponding to the first byte
+        headerBuilder.append(makeByteString(frequencyLength));
+
+
         for (int i = 0; i < frequencyTable.getSize(); i++) {
             headerBuilder.append(makeByteString(frequencyTable.getChar(i))); // chars are ints in reality
-            headerBuilder.append(makeByteString(frequencyTable.getFrequency(i)));
+            headerBuilder.append(makeBitString(frequencyTable.getFrequency(i), frequencyLength));
         }
 
         // Create a separator
@@ -63,12 +76,27 @@ public class Compressor {
      * Converts an integer into a byte string
      * @param i an integer we want to convert
      * @return the integer i in byte form
+     * @throws IllegalArgumentException if i is too big
      */
-    private String makeByteString(int i) {
+    private String makeByteString(int i) throws IllegalArgumentException {
+        return makeBitString(i, 8);
+    }
+
+    /**
+     * Converts an integer into a bit string of a certain length
+     * @param i the integer we want to convert
+     * @param len the length of the bit string we want
+     * @return the integer i in bit string form with length len
+     * @throws IllegalArgumentException if i is too big to be len long
+     */
+    private String makeBitString(int i, int len) throws IllegalArgumentException {
         StringBuilder byteBuilder = new StringBuilder();
         byteBuilder.append(Integer.toBinaryString(i));
 
-        while (byteBuilder.length() < 8)
+        if (byteBuilder.length() > len)
+            throw new IllegalArgumentException("i cannot be converted to length " + len);
+
+        while (byteBuilder.length() < len)
             byteBuilder.insert(0, "0");
 
         return byteBuilder.toString();
