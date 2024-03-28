@@ -151,7 +151,7 @@ public class Compressor {
         byte[] bytes = new byte[bitString.length() / 8];
 
         for (int i = 0; i < bytes.length; i++) {
-            String substring = bitString.substring(i, i + 8);
+            String substring = bitString.substring(i * 8, i * 8 + 8);
             bytes[i] = stringToByte(substring);
         }
 
