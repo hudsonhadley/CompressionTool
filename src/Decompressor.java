@@ -22,6 +22,7 @@ public class Decompressor {
     private PrefixCodeTable prefixCodeTable;
     private String bytes;
     private int startOfText;
+    private int endOfText;
 
     /**
      * Constructs a decompressor based on the input text
@@ -35,7 +36,20 @@ public class Decompressor {
         System.out.println(bytes);
 
         frequencyTable = getFrequencyTable();
-        System.out.println(frequencyTable);
+        huffmanBinaryTree = new HuffmanBinaryTree(frequencyTable);
+        prefixCodeTable = new PrefixCodeTable(huffmanBinaryTree);
+
+        // getFrequencyTable found the start of the text, but we also need to find the end (some bits were tacked on
+        // so that we could pack into bytes)
+        char lastBit = bytes.charAt(bytes.length() - 1);
+        int i = bytes.length() - 1;
+        // The tacked on bits will all be the same as the last one, so keep going until you find one that is different
+        while (bytes.charAt(i) == lastBit)
+            i -= 1;
+
+        endOfText = i + 1;
+
+        System.out.println(startOfText + " " + endOfText);
     }
 
     /**
