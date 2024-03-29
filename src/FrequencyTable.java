@@ -68,7 +68,9 @@ public class FrequencyTable {
         // Go through every character (whitespace included)
         while (stringScanner.hasNext()) {
             char character = stringScanner.next().charAt(0);
-            add(character);
+            // We can't handle characters that can't be packed into a byte, so ignore those
+            if (Integer.toBinaryString(character).length() <= 8)
+                add(character);
         }
 
         stringScanner.close();

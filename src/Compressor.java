@@ -86,7 +86,9 @@ public class Compressor {
 
         // Go through every character in the text and replace each in the string builder
         for (int i = 0; i < text.length(); i++) {
-            compressedStringBuilder.append(prefixCodeTable.getCode(text.charAt(i)));
+            // We did not keep track if the characters that cannot be packed into a byte
+            if (Integer.toBinaryString(text.charAt(i)).length() <= 8)
+                compressedStringBuilder.append(prefixCodeTable.getCode(text.charAt(i)));
         }
 
         // The bit string has to be divisible by 8, so we will add the opposite of the last bit until we reach that
