@@ -39,6 +39,23 @@ public class Main {
     }
 
     /**
+     * @param bitString a bit string we want to convert to an int
+     * @return the corresponding int ("10" -> 2)
+     * @throws IllegalArgumentException if bitString has anything other than 0s and 1s
+     */
+    public static int binaryStringToInt(String bitString) throws IllegalArgumentException {
+        int value = 0;
+
+        for (int i = 0; i < bitString.length(); i++) {
+            int bit = bitString.charAt(i) - 48; // ascii 48 --> '0'       ascii 49 --> '1'
+
+            value += bit * (int) Math.pow(2, (bitString.length() - 1 - i));
+        }
+
+        return value;
+    }
+
+    /**
      * @param bytes an array of bytes we want to turn into a string of 0s and 1s
      * @return a String of 0s and 1s representing the bytes array
      */
@@ -160,7 +177,6 @@ public class Main {
         }
 
         if (decompressing) {
-            // TODO Decompress the file
             byte[] inputBytes = getFileBytes(input);
 
             Decompressor decompressor = new Decompressor(inputBytes);

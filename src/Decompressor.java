@@ -1,8 +1,5 @@
-import java.beans.FeatureDescriptor;
-import java.nio.charset.StandardCharsets;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
 
 /**
  * The Decompressor class is used to decompress a file or String. The file must be compressed by the Compressor class
@@ -96,8 +93,8 @@ public class Decompressor {
         // In the string, 0-7 is the frequency length, 8-15 is the first character,
         // and 16-(16+frequency length) is the first frequency
         int frequencyLength = Main.stringToByte(bytes.substring(0, 8));
-        characters.add((char) Main.stringToByte(bytes.substring(8,16))); // Add the first character
-        frequencies.add((int) Main.stringToByte(bytes.substring(16,16 + frequencyLength))); // Add the first frequency
+        characters.add((char) Main.stringToByte(bytes.substring(8, 16))); // Add the first character
+        frequencies.add(Main.binaryStringToInt(bytes.substring(16, 16 + frequencyLength))); // Add the first frequency
 
         // Parse through one after the first frequency until we find the first character again (then we stop)
         int i = 16 + frequencyLength;
@@ -113,7 +110,7 @@ public class Decompressor {
                 break;
             }
 
-            int f = (int) Main.stringToByte(bytes.substring(i + 8, i + 8 + frequencyLength));
+            int f = Main.binaryStringToInt(bytes.substring(i + 8, i + 8 + frequencyLength));
 
             characters.add(c);
             frequencies.add(f);
