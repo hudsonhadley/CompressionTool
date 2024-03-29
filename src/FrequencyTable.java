@@ -145,7 +145,7 @@ public class FrequencyTable {
     public int getMaxFrequency() {
         int max = 0;
 
-        for (int frequency : frequencies) {
+        for (int frequency: frequencies) {
             if (frequency > max)
                 max = frequency;
         }

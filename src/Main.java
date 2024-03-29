@@ -1,5 +1,9 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -106,7 +110,7 @@ public class Main {
      * @return a String of the file
      * @throws FileNotFoundException if the file cannot be found
      */
-    public static String getFileString(String fileName) throws FileNotFoundException {
+    public static String getFileString(String fileName) throws IOException {
         File inFile = new File(fileName);
         Scanner fileScanner = new Scanner(inFile);
         fileScanner.useDelimiter("");
