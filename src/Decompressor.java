@@ -103,7 +103,8 @@ public class Decompressor {
         // per loop. This way we only need to do it once per time through and we can just break if we hit it
         while (true) {
             // the first 8 is the character, and the next 'frequencyLength' bits are the frequency
-            char c = (char) Main.stringToByte(bytes.substring(i, i + 8));
+            byte b = Main.stringToByte(bytes.substring(i, i + 8));
+            char c = (char) Byte.toUnsignedInt(b);
             // If the character is the same as the first one, we have reached the end of the frequency table
             if (c == characters.get(0)) {
                 startOfText = i + 8; // the text will start after the second occurrence of the first character
