@@ -90,33 +90,36 @@ public class Decompressor {
         ArrayList<Character> characters = new ArrayList<>();
         ArrayList<Integer> frequencies = new ArrayList<>();
 
+        int lengthOfCharacters = 16;
+
         // In the string, 0-7 is the frequency length, 8-15 is the first character,
         // and 16-(16+frequency length) is the first frequency
         int frequencyLength = Main.stringToByte(bytes.substring(0, 8));
-        characters.add((char) Main.stringToByte(bytes.substring(8, 16))); // Add the first character
-        frequencies.add(Main.binaryStringToInt(bytes.substring(16, 16 + frequencyLength))); // Add the first frequency
+        characters.add((char) Main.binaryStringToInt(bytes.substring(8, 8 + lengthOfCharacters))); // Add the first character
+        frequencies.add(Main.binaryStringToInt(bytes.substring(8 + lengthOfCharacters, 8 + lengthOfCharacters + frequencyLength))); // Add the first frequency
 
         // Parse through one after the first frequency until we find the first character again (then we stop)
-        int i = 16 + frequencyLength;
+        int i = 8 + lengthOfCharacters + frequencyLength;
 
         // We use a while (true) with a break since it is bulky to compute the value of the character several times
         // per loop. This way we only need to do it once per time through and we can just break if we hit it
         while (true) {
-            // the first 8 is the character, and the next 'frequencyLength' bits are the frequency
-            byte b = Main.stringToByte(bytes.substring(i, i + 8));
-            char c = (char) Byte.toUnsignedInt(b);
+
+            // the first 'lengthOfCharacters' is the character, and the next 'frequencyLength' bits are the frequency
+            String sub = bytes.substring(i, i + lengthOfCharacters);
+            char c = (char) Main.binaryStringToInt(sub);
             // If the character is the same as the first one, we have reached the end of the frequency table
             if (c == characters.get(0)) {
-                startOfText = i + 8; // the text will start after the second occurrence of the first character
+                startOfText = i + lengthOfCharacters; // the text will start after the second occurrence of the first character
                 break;
             }
 
-            int f = Main.binaryStringToInt(bytes.substring(i + 8, i + 8 + frequencyLength));
+            int f = Main.binaryStringToInt(bytes.substring(i + lengthOfCharacters, i + lengthOfCharacters + frequencyLength));
 
             characters.add(c);
             frequencies.add(f);
 
-            i += 8 + frequencyLength;
+            i += lengthOfCharacters + frequencyLength;
         }
 
         return new FrequencyTable(characters, frequencies);

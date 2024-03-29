@@ -50,6 +50,7 @@ public class Compressor {
      */
     private String getHeader() {
         StringBuilder headerBuilder = new StringBuilder();
+        int lengthOfCharacters = 16;
 
         // We first need to determine how many bits are going to be used to store each frequency
         // (This cannot simply be a byte since frequencies will often exceed 2^8 for large text files)
@@ -63,12 +64,12 @@ public class Compressor {
 
 
         for (int i = 0; i < frequencyTable.getSize(); i++) {
-            headerBuilder.append(Main.makeByteString(frequencyTable.getChar(i))); // chars are ints in reality
+            headerBuilder.append(Main.makeBitString(frequencyTable.getChar(i), lengthOfCharacters)); // chars are ints in reality
             headerBuilder.append(Main.makeBitString(frequencyTable.getFrequency(i), frequencyLength));
         }
 
         // Create a separator
-        headerBuilder.append(Main.makeByteString(frequencyTable.getChar(0)));
+        headerBuilder.append(Main.makeBitString(frequencyTable.getChar(0), lengthOfCharacters));
 
         return headerBuilder.toString();
     }
@@ -87,8 +88,8 @@ public class Compressor {
         // Go through every character in the text and replace each in the string builder
         for (int i = 0; i < text.length(); i++) {
             // We did not keep track if the characters that cannot be packed into a byte
-            if (Integer.toBinaryString(text.charAt(i)).length() <= 8)
-                compressedStringBuilder.append(prefixCodeTable.getCode(text.charAt(i)));
+//            if (Integer.toBinaryString(text.charAt(i)).length() <= 8)
+            compressedStringBuilder.append(prefixCodeTable.getCode(text.charAt(i)));
         }
 
         // The bit string has to be divisible by 8, so we will add the opposite of the last bit until we reach that
