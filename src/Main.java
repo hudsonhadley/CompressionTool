@@ -132,48 +132,18 @@ public class Main {
         return inputStream.readAllBytes();
     }
 
-    /**
-     * The main loop that is executed upon call
-     * @param args has the pattern of
-     *             <br>
-     *             &lt;input&gt; [-d] &lt;output&gt;
-     *             <br><br>
-     *             &lt;input&gt; - the file we want to compress
-     *             <br>
-     *             [-d] - if we want to decompress
-     *             <br>
-     *             &lt;output&gt; - where we want our output to go (default is the input)
-     *
-     * @throws IOException from FileOutputStream.write(bytes[]) or if an improper amount of arguments is given or if
-     * file is not found
-     */
     public static void main(String[] args) throws IOException {
-        // We need 1 to 3 arguments to run
-        if (args.length < 1 || args.length > 3)
-            throw new IOException("Invalid amount of arguments");
+        Scanner inScanner = new Scanner(System.in);
 
-        // The first argument is always the input file
-        String input = args[0];
-        boolean decompressing;
-        String output;
+        System.out.print("Enter an input file> ");
+        String input = inScanner.nextLine();
 
-        // With only one argument, we aren't decompressing and the output file is the input file
-        if (args.length == 1) {
-            decompressing = false;
-            output = input;
-        } else if (args.length == 2) // If we only have two arguments, it is either <input> <output> or <input> -d
-            // If we supplied -d, then we are decompressing and the output file is the input file
-            if (args[1].equals("-d")) {
-                decompressing = true;
-                output = input;
-            } else {
-                decompressing = false;
-                output = args[1];
-            }
-        else { // If we have three arguments, we are decompressing and the output is specified
-            decompressing = true;
-            output = args[2];
-        }
+        System.out.print("Compressing? (y or n)> ");
+        boolean decompressing = inScanner.nextLine().toLowerCase().charAt(0) == 'n';
+
+        System.out.print("Enter an output file> ");
+        String output = inScanner.nextLine();
+
 
         if (decompressing) {
             byte[] inputBytes = getFileBytes(input);
