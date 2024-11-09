@@ -29,12 +29,8 @@ for determining if the compression was lossy
 * [FrequencyTableTest](src/FrequencyTableTest.java) - Some small test code to make sure FrequencyTable is working properly
 * [HuffmanBinaryTree](src/HuffmanBinaryTree.java) - Stores a [Huffman binary tree](https://en.wikipedia.org/wiki/Huffman_coding)
 that is used to determine what binary codes are for what characters
-* [HuffmanInternalNode](src/HuffmanInternalNode.java) - [Huffman binary trees](src/HuffmanBinaryTree.java) have nodes and leaves. Nodes do not correspond
-to a character, but are a bridge between two characters
-* [HuffmanLeaf](src/HuffmanLeaf.java) - Leaves correspond to characters and their frequencies in the tree
 * [Main](src/Main.java) - Where the compression/decompression occurs. This can be accessed through command line arguments
-* [Node](src/Node.java) - A parent class for the [HuffmanInternalNode](src/HuffmanInternalNode.java) and the
-[HuffmanLeaf](src/HuffmanLeaf.java)
+* [Node](src/Node.java) - A node of the binary tree which the huffman encryption algorithms makes use of.
 * [PrefixCodeTable](src/PrefixCodeTable.java) - A lookup to determine what codes correspond to what characters
 * [PrefixCodeTableTest](src/PrefixCodeTableTest.java) - Some simple tests to make sure PrefixCodeTable is working properly
 

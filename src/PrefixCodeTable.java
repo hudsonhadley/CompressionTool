@@ -23,12 +23,11 @@ public class PrefixCodeTable {
     public PrefixCodeTable(HuffmanBinaryTree huffmanBinaryTree) {
         characters = new ArrayList<>();
         codes = new ArrayList<>();
-
+        Node root = huffmanBinaryTree.getRoot();
         // If in our binary tree the root is a leaf, there is only one character
-        if (huffmanBinaryTree.getRoot() instanceof HuffmanLeaf) {
-            HuffmanLeaf hl = (HuffmanLeaf) huffmanBinaryTree.getRoot();
+        if (root.isExternal()) {
             // Since there's only one character we can just declare the code to be "0"
-            characters.add(hl.getValue());
+            characters.add(root.getValue());
             codes.add("0");
         } else { // If the tree is more extensive
             generateCodes("", huffmanBinaryTree.getRoot());
@@ -45,9 +44,8 @@ public class PrefixCodeTable {
      */
     private void generateCodes(String currentCode, Node node) {
         // If it is a leaf, we want to add the character and code
-        if (node instanceof HuffmanLeaf) {
-            HuffmanLeaf leaf = (HuffmanLeaf) node;
-            characters.add(leaf.getValue());
+        if (node.isExternal()) {
+            characters.add(node.getValue());
             codes.add(currentCode);
         } else { // If it is not a leaf, all we care about are its children
             generateCodes(currentCode + "0", node.getLeft());

@@ -7,8 +7,6 @@ import java.util.Collections;
  * Internal nodes do not have a value, but only a weight. These always have children. Leafs have both a weight and a
  * value. These never have children. Additionally, the HuffmanBinaryTree implements the Comparable interface. This is
  * so that when we compare two HuffmanBinaryTrees, they are compared based on the weight of the root node.
- * @see HuffmanLeaf
- * @see HuffmanInternalNode
  * @author Hudson Hadley
  */
 public class HuffmanBinaryTree implements Comparable<HuffmanBinaryTree> {
@@ -23,7 +21,7 @@ public class HuffmanBinaryTree implements Comparable<HuffmanBinaryTree> {
      * @param weight the weight we want to assign (refers to frequency)
      */
     public HuffmanBinaryTree(char value, int weight) {
-        this.root = new HuffmanLeaf(value, weight);
+        this.root = new Node(value, weight, null, null);
     }
 
     /**
@@ -63,7 +61,8 @@ public class HuffmanBinaryTree implements Comparable<HuffmanBinaryTree> {
      * @param other the other Huffman binary tree we want to merge with
      */
     private void merge(HuffmanBinaryTree other) {
-        HuffmanInternalNode root = new HuffmanInternalNode(
+        Node root = new Node(
+                ' ',
                 this.getRootWeight() + other.getRootWeight(),
                 other.getRoot(),
                 this.getRoot()
@@ -76,7 +75,7 @@ public class HuffmanBinaryTree implements Comparable<HuffmanBinaryTree> {
      * @return the weight of the root node
      */
     public int getRootWeight() {
-        return root.weight;
+        return root.getWeight();
     }
 
     /**

@@ -3,9 +3,11 @@
  * @author Hudson Hadley
  */
 public class Node {
-    protected int weight;
-    protected Node left;
-    protected Node right;
+    private int weight;
+    private char value;
+
+    private Node left;
+    private Node right;
 
     /**
      * Constructor setting each member variable
@@ -13,7 +15,8 @@ public class Node {
      * @param left the left neighbor of the node
      * @param right the right neighbor of the node
      */
-    public Node(int weight, Node left, Node right) {
+    public Node(char value, int weight, Node left, Node right) {
+        this.value = value;
         this.weight = weight;
         this.left = left;
         this.right = right;
@@ -34,12 +37,20 @@ public class Node {
         return weight;
     }
 
+    public char getValue() {
+        return value;
+    }
+
     public Node getLeft() {
         return left;
     }
 
     public Node getRight() {
         return right;
+    }
+
+    public boolean isExternal() {
+        return left == null && right == null;
     }
 
     /**
